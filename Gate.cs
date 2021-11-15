@@ -187,7 +187,7 @@ namespace chips
             StartPosition = startPosition;
             EndPosition = endPosition;
         }
-        public float distanceFromPoint(Vector2 point) {
+        public float DistanceFromPoint(Vector2 point) {
             float m = (EndPosition.Y - StartPosition.Y) / (EndPosition.X - StartPosition.X);
             float d = MathF.Abs(-m * point.X + point.Y + m * StartPosition.X - StartPosition.Y) / MathF.Sqrt(MathF.Pow(m, 2) + 1);
             return d;
@@ -203,7 +203,7 @@ namespace chips
                 }
             }
             // If wire was just right clicked, delete it
-            if (Input.WasRightButtonJustDown() && distanceFromPoint(Camera.MouseWorldCoords()) < 10f && new Rectangle((int)Math.Min(EndPosition.X, StartPosition.X) - 5, (int)Math.Min(EndPosition.Y, StartPosition.Y) - 5, (int)Math.Abs(EndPosition.X - StartPosition.X) + 5, (int)Math.Abs(EndPosition.Y - StartPosition.Y) + 5).Contains(Camera.MouseWorldCoords()))
+            if (Input.WasRightButtonJustDown() && DistanceFromPoint(Camera.MouseWorldCoords()) < 10f && new Rectangle((int)Math.Min(EndPosition.X, StartPosition.X) - 5, (int)Math.Min(EndPosition.Y, StartPosition.Y) - 5, (int)Math.Abs(EndPosition.X - StartPosition.X) + 5, (int)Math.Abs(EndPosition.Y - StartPosition.Y) + 5).Contains(Camera.MouseWorldCoords()))
                 isExpired = true;
         }
         public void Draw(SpriteBatch spriteBatch) {
