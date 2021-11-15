@@ -169,8 +169,9 @@ namespace chips
                 spriteBatch.Draw(Art.Pixel, Camera.WorldToScreen(InputPositions[0]), null, Color.Green, 0f, new Vector2(0.5f), 10f, 0, 0);
                 spriteBatch.Draw(Art.Pixel, Camera.WorldToScreen(InputPositions[1]), null, Color.Green, 0f, new Vector2(0.5f), 10f, 0, 0);
             }
-            // Draw output (there is only ever one)
-            spriteBatch.Draw(Art.Pixel, Camera.WorldToScreen(new Vector2(Position.X + Size.X / 2f, Position.Y)), null, Color.Green, 0f, new Vector2(0.5f), 10f, 0, 0);
+            // Draw output (if there is one)
+            if (Outputs.Length == 1)
+                spriteBatch.Draw(Art.Pixel, Camera.WorldToScreen(new Vector2(Position.X + Size.X / 2f, Position.Y)), null, Color.Green, 0f, new Vector2(0.5f), 10f, 0, 0);
             // If gate is an LED, draw whether it's on or off
             if (Type == "led" && Inputs[0] == true) {
                 spriteBatch.Draw(Art.LedOn, Rect, Color.White);
