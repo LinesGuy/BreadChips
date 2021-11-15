@@ -34,7 +34,7 @@ namespace chips {
             return lastMouse.ScrollWheelValue - mouse.ScrollWheelValue;
         }
         public static Vector2 DeltaMouse() {
-            return mouse.Position.ToVector2() - lastMouse.Position.ToVector2();
+            return (mouse.Position.ToVector2() - lastMouse.Position.ToVector2()) / Camera.Zoom;
         }
     }
 }
