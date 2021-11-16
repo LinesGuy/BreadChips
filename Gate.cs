@@ -216,17 +216,14 @@ namespace chips
                 isExpired = true;
         }
         public void Draw(SpriteBatch spriteBatch) {
-            Color pointsColor = Color.Blue;
-            if (activated)
-                pointsColor = Color.Red;
             Vector2 StartScreen = Camera.WorldToScreen(StartPosition);
             Vector2 EndScreen = Camera.WorldToScreen(EndPosition);
             // end point
-            spriteBatch.Draw(Art.Pixel, StartScreen, null, pointsColor, 0f, new Vector2(0.5f), Radius, 0, 0);
+            spriteBatch.Draw(Art.Pixel, StartScreen, null, activated ? Color.Red : Color.Green, 0f, new Vector2(0.5f), Radius, 0, 0);
             // start point
-            spriteBatch.Draw(Art.Pixel, EndScreen, null, pointsColor, 0f, new Vector2(0.5f), Radius, 0, 0);
+            spriteBatch.Draw(Art.Pixel, EndScreen, null, activated ? Color.Red : Color.Green, 0f, new Vector2(0.5f), Radius, 0, 0);
             // line
-            spriteBatch.Draw(Art.Pixel, StartScreen, null, Color.Black, MathF.Atan2(EndScreen.Y - StartScreen.Y, EndScreen.X - StartScreen.X), new Vector2(0, 0.5f), new Vector2(MathF.Sqrt(MathF.Pow(EndScreen.X - StartScreen.X, 2) + MathF.Pow(EndScreen.Y - StartScreen.Y, 2)), 5f * Camera.Zoom), 0, 0); ;
+            spriteBatch.Draw(Art.Pixel, StartScreen, null, activated ? Color.DarkRed : Color.Black, MathF.Atan2(EndScreen.Y - StartScreen.Y, EndScreen.X - StartScreen.X), new Vector2(0, 0.5f), new Vector2(MathF.Sqrt(MathF.Pow(EndScreen.X - StartScreen.X, 2) + MathF.Pow(EndScreen.Y - StartScreen.Y, 2)), 5f * Camera.Zoom), 0, 0); ;
             // arrow
             spriteBatch.Draw(Art.Arrow, (StartScreen + EndScreen) / 2f, null, Color.Black, MathF.Atan2(EndScreen.Y - StartScreen.Y, EndScreen.X - StartScreen.X), new Vector2(Art.Arrow.Width, Art.Arrow.Height) / 2f, Camera.Zoom, 0, 0); ;
         }
