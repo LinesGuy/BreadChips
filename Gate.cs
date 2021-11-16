@@ -157,7 +157,6 @@ namespace chips
                 default:
                     break;
             }
-            UpdateRect(); // temp?
             // If gate was just right clicked, delete it
             if (Input.WasRightButtonJustDown() && Rect.Contains(Input.mouse.Position))
                 isExpired = true;
@@ -168,6 +167,7 @@ namespace chips
         }
         public void Draw(SpriteBatch spriteBatch)
         {
+            UpdateRect();
             // Draw red background (hitbox)
             spriteBatch.Draw(Art.Pixel, Rect, new Color(255, 0, 0, 32));
             // Draw gate itself
