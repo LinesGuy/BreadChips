@@ -168,8 +168,6 @@ namespace chips
         public void Draw(SpriteBatch spriteBatch)
         {
             UpdateRect();
-            // Draw red background (hitbox)
-            spriteBatch.Draw(Art.Pixel, Rect, new Color(255, 0, 0, 32));
             // Draw gate itself
             spriteBatch.Draw(Image, Rect, Color.White);
             // Draw inputs (either one or two)
