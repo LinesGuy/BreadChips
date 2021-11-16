@@ -296,13 +296,47 @@ namespace chips
                     }
                 }
             } else if (Input.WasLeftButtonJustUp()) {
+                if (selectedType == "wireEnd") {
+                    foreach(Gate gate in Gates) {
+                        foreach(Vector2 inputPos in gate.InputPositions) {
+                            if (Vector2.DistanceSquared(Wires[selectedIndex].EndPosition, inputPos) < Wire.Radius * Wire.Radius) {
+                                Wires[selectedIndex].EndPosition = inputPos;
+                            }
+                        }
+                    }
+                }
+                if (selectedType == "wireStart") {
+                    foreach (Gate gate in Gates) {
+                        foreach (Vector2 outputPos in gate.OutputPositions) {
+                            if (Vector2.DistanceSquared(Wires[selectedIndex].StartPosition, outputPos) < Wire.Radius * Wire.Radius) {
+                                Wires[selectedIndex].StartPosition = outputPos;
+                            }
+                        }
+                    }
+                }
                 selectedType = "none";
+
             }
             switch (selectedType) {
                 case "camera":
                     Camera.CameraPosition -= Input.DeltaMouse();
                     break;
                 case "gate":
+                    Gate gate = Gates[selectedIndex];
+                    foreach (Vector2 inputPos in gate.InputPositions) {
+                        foreach(Wire wire in Wires) {
+                            if (wire.EndPosition == inputPos) {
+                                wire.EndPosition += Input.DeltaMouse();
+                            }
+                        }
+                    }
+                    foreach (Vector2 outputPos in gate.OutputPositions) {
+                        foreach (Wire wire in Wires) {
+                            if (wire.StartPosition == outputPos) {
+                                wire.StartPosition += Input.DeltaMouse();
+                            }
+                        }
+                    }
                     Gates[selectedIndex].Position += Input.DeltaMouse();
                     Gates[selectedIndex].UpdateRect();
                     break;
