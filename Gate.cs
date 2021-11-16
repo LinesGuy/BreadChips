@@ -157,9 +157,11 @@ namespace chips
                 default:
                     break;
             }
+            UpdateRect();
             // If gate was just right clicked, delete it
             if (Input.WasRightButtonJustDown() && Rect.Contains(Input.mouse.Position))
                 isExpired = true;
+            
         }
         public void UpdateRect() {
             Vector2 screenPos = Camera.WorldToScreen(Position);
@@ -167,7 +169,7 @@ namespace chips
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            UpdateRect();
+            
             // Draw gate itself
             spriteBatch.Draw(Image, Rect, Color.White);
             // Draw inputs (either one or two)
