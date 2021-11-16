@@ -20,6 +20,8 @@ namespace chips {
         public static Texture2D Led;
         public static Texture2D LedOn;
         public static Texture2D Hud;
+        public static Texture2D ButtonOn;
+        public static Texture2D ButtonOff;
         public static void Load(ContentManager content) {
             GateAnd = content.Load<Texture2D>("and");
             Arrow = content.Load<Texture2D>("arrow");
@@ -38,6 +40,8 @@ namespace chips {
             Led = content.Load<Texture2D>("Led");
             LedOn = content.Load<Texture2D>("LedOn");
             Hud = content.Load<Texture2D>("hud");
+            ButtonOn = content.Load<Texture2D>("buttonOn");
+            ButtonOff = content.Load<Texture2D>("buttonOff");
         }
     }
 }

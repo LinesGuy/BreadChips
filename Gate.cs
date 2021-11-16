@@ -80,6 +80,16 @@ namespace chips
                     Inputs = new bool[1] { false };
                     Outputs = new bool[1];
                     break;
+                case "buttonOn":
+                    Image = Art.ButtonOn;
+                    Inputs = new bool[0];
+                    Outputs = new bool[1] { true };
+                    break;
+                case "buttonOff":
+                    Image = Art.ButtonOff;
+                    Inputs = new bool[0];
+                    Outputs = new bool[1] { false };
+                    break;
             }
             Size = new Vector2(Image.Width, Image.Height);
             UpdateRect();
@@ -117,7 +127,7 @@ namespace chips
                 case "and":
                     Outputs[0] = Inputs[0] && Inputs[1];
                     break;
-                case "buffer":
+                case "buffer": case "switchClosed":
                     Outputs[0] = Inputs[0];
                     break;
                 case "nand":
@@ -138,11 +148,11 @@ namespace chips
                 case "xor":
                     Outputs[0] = Inputs[0] ^ Inputs[1];
                     break;
-                case "switch":
+                case "switch": case "buttonOff":
                     Outputs[0] = false;
                     break;
-                case "switchClosed":
-                    Outputs[0] = Inputs[0];
+                case "buttonOn":
+                    Outputs[0] = true;
                     break;
                 default:
                     break;
@@ -260,6 +270,12 @@ namespace chips
                         } else if (gate.Type == "switchClosed") {
                             gate.Type = "switch";
                             gate.Image = Art.Switch;
+                        } else if (gate.Type == "buttonOn") {
+                            gate.Type = "buttonOff";
+                            gate.Image = Art.ButtonOff;
+                        } else if (gate.Type == "buttonOff") {
+                            gate.Type = "buttonOn";
+                            gate.Image = Art.ButtonOn;
                         }
                         selectedIndex = i;
                         selectedType = "gate";
@@ -322,6 +338,8 @@ namespace chips
                 Add(new Gate(Camera.MouseWorldCoords(), "led"));
             if (Input.WasKeyJustDown(Keys.D9))
                 Add(new Gate(Camera.MouseWorldCoords(), "switch"));
+            if (Input.WasKeyJustDown(Keys.B))
+                Add(new Gate(Camera.MouseWorldCoords(), "buttonOn"));
         }
         public static void Draw(SpriteBatch spriteBatch)
         {
